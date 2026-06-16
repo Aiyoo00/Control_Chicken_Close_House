@@ -153,7 +153,23 @@
             <div class="card-value"><span id="val-weight">--.-</span><span class="card-unit"> Kg</span></div>
         </div>
 
-        <div class="card emergency" id="card-emergency">
+        
+        <div class="card">
+            <div class="card-title">💨 Blower</div>
+            <div class="card-value"><span id="val-blower">OFF</span></div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">🌪️ Exhaust</div>
+            <div class="card-value"><span id="val-exhaust">OFF</span></div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">⚙️ Motor Pakan</div>
+            <div class="card-value"><span id="val-motor">OFF</span></div>
+        </div>
+
+<div class="card emergency" id="card-emergency">
             <div class="card-title">🚨 Status Keamanan (BMS)</div>
             <div class="card-value safe-text" id="val-emergency" style="font-size: 28px;">AMAN</div>
         </div>
@@ -162,7 +178,8 @@
     <script>
         // KONEKSI DIPERBAIKI MENGGUNAKAN WSS PORT 8884
         const brokerUrl = 'wss://broker.hivemq.com:8884/mqtt';
-        const topicData = 'kandangayam/data';
+        const topicData = 'kandangayam/sensor';
+        const topicStack = 'kandangayam/stackmonitor';
         
         const statusBadge = document.getElementById('connection-status');
         const elTemp = document.getElementById('val-temp');
@@ -170,6 +187,9 @@
         const elGas = document.getElementById('val-gas');
         const elDistance = document.getElementById('val-distance');
         const elWeight = document.getElementById('val-weight');
+        const elBlower = document.getElementById('val-blower');
+        const elExhaust = document.getElementById('val-exhaust');
+        const elMotor = document.getElementById('val-motor');
         const elEmergency = document.getElementById('val-emergency');
         const cardEmergency = document.getElementById('card-emergency');
 
@@ -191,7 +211,7 @@
             
             client.subscribe(topicData, (err) => {
                 if (!err) {
-                    console.log('Berhasil subscribe ke topik: ' + topicData);
+                    console.log('Berhasil subscribe ke topik: ' + topicData); client.subscribe(topicStack);
                 }
             });
         });
@@ -218,6 +238,10 @@
                     }
                     
                     elWeight.innerText = parseFloat(data.weight).toFixed(2);
+
+                    elBlower.innerText = data.blower ? 'ON' : 'OFF';
+                    elExhaust.innerText = data.exhaust ? 'ON' : 'OFF';
+                    elMotor.innerText = data.motor ? 'ON' : 'OFF';
 
                     if (data.emergency === 1 || data.emergency === true || data.emergency === "1") {
                         elEmergency.innerText = "BAHAYA (AKTIF)";
