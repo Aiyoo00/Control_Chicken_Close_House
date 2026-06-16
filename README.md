@@ -2,6 +2,8 @@
 
 Proyek ini adalah sistem kendali dan pemantauan IoT pintar untuk kandang ayam berkonsep *Close House*. Sistem ini dibangun menggunakan mikrokontroler **ESP32** dan memanfaatkan **FreeRTOS** untuk menjalankan berbagai tugas (multitasking) secara efisien dan real-time, mulai dari pembacaan sensor, logika kontrol aktuator, hingga pengiriman data ke server MQTT.
 
+<img width="1105" height="730" alt="{F8005D3D-1975-4C30-8A96-CD319165AB9A}" src="https://github.com/user-attachments/assets/7e7f6ede-512f-4635-9d7d-e04c084f0646" />
+
 
 ---
 
